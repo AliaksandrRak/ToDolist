@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import './DragDropElement.sass'
+import './DraggableElement.sass'
 
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import { reorder, getItemStyle, getListStyle } from './DragDropSettings';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { getItemStyle, getListStyle } from './DragDropSettings';
 
 
-function DragDropElement(props) {
+function DraggableElement(props) {
 
     let username = window.localStorage.getItem('username');
     const [text, setText] = useState();
@@ -52,7 +52,7 @@ function DragDropElement(props) {
                                                     <button className='dragDropElement-editForm-submit' onClick={() => props.changeTask(item.id, text)}>Изменить</button>
                                                 </div>
                                                 :
-                                                <span>{item.text}</span>
+                                                <span className={`${item.isCompleted && 'dragDropElement-complet'}`}>{item.text}</span>
                                             }
 
                                         <div className="dragDropElement-delete" onClick={() => props.deleteTask(item.id)}></div>
@@ -69,4 +69,4 @@ function DragDropElement(props) {
     );
 }
 
-export default DragDropElement;
+export default DraggableElement;

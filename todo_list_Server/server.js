@@ -15,12 +15,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 var numUsers = 0;
-var todoList = [];
+var todoList = []; // instead of an array, there can be any database
 
 io.on('connection', (socket) => {
   var addedUser = false;
 
-  socket.on('add user', (username) => {
+  socket.on('addUser', (username) => {
     console.log("username", username);
     if (addedUser) return;
 
@@ -29,50 +29,50 @@ io.on('connection', (socket) => {
     addedUser = true;
     socket.emit('login', todoList);
 
-    io.sockets.emit('user connect', {
+    io.sockets.emit('userConnect', {
       username: socket.username,
       numUsers: numUsers
     });
 
   });
 
-  socket.on('update task', (data) => {
+  socket.on('updateTask', (data) => {
 
     todoList = data;
-    socket.broadcast.emit('tasks list',  todoList);
+    io.sockets.emit('tasksList',  todoList);
 
   });
 
-  socket.on('create task', (data) => {
+  socket.on('createTask', (data) => {
 
     todoList.push(data);
-    socket.broadcast.emit('tasks list',  todoList);
+    io.sockets.emit('tasksList',  todoList);
 
   });
 
-  socket.on('delete task', function (id) {
+  socket.on('deleteTask', function (id) {
 
     todoList = todoList.filter(el => el.id !== id);
 
-    io.sockets.emit('tasks list',  todoList);
+    io.sockets.emit('tasksList',  todoList);
 
   });
 
-  socket.on('being edited', (id) => {
+  socket.on('beingEdited', (id) => {
 
     todoList.find((el, index) => el.id === id && 
     (todoList[index].isBeingEdited = { status: !todoList[index].isBeingEdited.status, user: socket.username }));
 
-    io.sockets.emit('tasks list',  todoList);
+    io.sockets.emit('tasksList',  todoList);
 
   });
 
-  socket.on('stop being edited', (id) => {
+  socket.on('stopBeingEdited', (id) => {
 
     todoList.find((el, index) => el.id === id && 
     (todoList[index].isBeingEdited = { status: !todoList[index].isBeingEdited.status, user: '' }));
 
-    io.sockets.emit('tasks list',  todoList);
+    io.sockets.emit('tasksList',  todoList);
 
   });
 
@@ -82,7 +82,7 @@ io.on('connection', (socket) => {
     if (addedUser) {
       --numUsers;
 
-      io.sockets.emit('user left', {
+      io.sockets.emit('userLeft', {
         username: socket.username,
         numUsers: numUsers
       });

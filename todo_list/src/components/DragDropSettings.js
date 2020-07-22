@@ -9,7 +9,6 @@ const reorder = (source, destination, that) => {
         result.splice(destination.index, 0, removed);
         state[source.droppableId] = result
         return { state }
-        // return { [source.droppableId]: result }
     }
     else {                                                  // outside array ?
         let sourceList, destinationList, result;
@@ -20,7 +19,6 @@ const reorder = (source, destination, that) => {
         state[source.droppableId] = sourceList
         state[destination.droppableId] = destinationList
         return { state, uid: removed.uid, removed_status: destination.droppableId }
-        // return { [source.droppableId]: sourceList, [destination.droppableId]: destinationList }
     }
 
 };
@@ -48,8 +46,6 @@ const getListStyle = (isDraggingOver) => ({
     paddingTop: "30px",
     maxWidth: 600,
     height: '100%',
-    // display: 'flex',
-    // flexWrap: 'wrap'
 });
 
 export { reorder, getItemStyle, getListStyle }

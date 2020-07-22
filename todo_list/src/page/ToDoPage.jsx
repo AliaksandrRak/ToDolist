@@ -1,7 +1,6 @@
 import React from 'react';
 import './ToDoPage.sass'
 
-
 import DragDropContextClass from '../components/DragDropContext';
 import CreateTaskForm from '../components/CreateTaskForm';
 
