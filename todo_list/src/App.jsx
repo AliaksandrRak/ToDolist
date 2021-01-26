@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
 
-import ToDoPage from './page/ToDoPage';
+import Support from './page/Support';
 
 
 function App() {
@@ -14,8 +14,8 @@ function App() {
         <BrowserRouter >
           
           <Switch>
-            <Route exact path='/todo'  component={ToDoPage} />
-            <Redirect from='/' to='/todo' />
+            <Route exact path='/support'  component={Support} />
+            <Redirect from='/' to='/support' />
           </Switch>
         </BrowserRouter>
     </>
