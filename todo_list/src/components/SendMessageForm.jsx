@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SendMessageForm.sass";
+import TextField from '@material-ui/core/TextField';
 
 import { socketEmit, createTask_api } from "./api";
 
@@ -21,16 +22,16 @@ function SendMessageForm(props) {
   };
 
   return (
-    <div className="createTask">
-      <textarea
-        type="text"
-        placeholder="Поставте задачу"
-        onChange={(e) => {
-          setTaskText(e.target.value);
-        }}
-        value={taskText}
-      />
-      <button onClick={createTask}>Создать задачу</button>
+    <div className="messageForm">
+       <TextField
+          className='messageForm-field'
+          multiline
+          value={taskText}
+          onChange={(e) => {
+            setTaskText(e.target.value);
+          }}
+        />
+      <button className='messageForm-btn' onClick={createTask}>send</button>
     </div>
   );
 }

@@ -1,53 +1,33 @@
 @import '../AllColors'
 
-.createTask 
-    padding-top: 30px
+.messageForm 
     display: flex
+    align-items: flex-end
     flex-wrap: wrap 
+    background: $gray-ligth
+
 
     @media screen and ( max-width: 900px )
         justify-content: center
 
-    textarea
-        margin: 0px 10px
-        border: none
-        border-bottom: 2px solid $white
-        background: $main-dark-blue
-        padding: 10px
-        min-width: 280px
-        font-size: 16px
-        color: $white
-        transition: all .3s
+    &-field
+        background: $gray-ligth
+        textarea
+            padding: 0 10px
+        div
+            &::after,&::before
+                display: none;
 
-        &::placeholder
-            color: $white
-
-        &:focus
-            outline: none
-            background: $white
-            color: $text-dark
-
-            &::placeholder
-                color: $text-dark
-        
-        &:hover
-            background: $white
-            color: $text-dark
-
-            &::placeholder
-                color: $text-dark
-
-    button
+    &-btn
         padding: 0px 15px
         background: $main-dark-blue
         border: 2px solid $none-color
         transition: all 1.3s
-        border-radius: 5px
-        padding: 10px
         font-size: 16px
         color: $white
         font-weight: 600
         cursor: pointer
+        height: 32px
 
         @media screen and ( max-width: 900px )
             margin-top: 20px
@@ -56,45 +36,45 @@
         &:focus
             outline: none
 
-        &:hover
-            animation-duration: .3s;
-            animation-name: slidein;
-            border-bottom: 2px solid $white
-            border-right: 2px solid $white
-            border-top: 2px solid $white
-            border-left: 2px solid $white
+        // &:hover
+        //     animation-duration: .3s;
+        //     animation-name: slidein;
+        //     border-bottom: 2px solid $white
+        //     border-right: 2px solid $white
+        //     border-top: 2px solid $white
+        //     border-left: 2px solid $white
             
 
-@keyframes slidein 
-    0% 
-        border-bottom: 2px solid $none-color
-        border-right: 2px solid $none-color
-        border-top: 2px solid $none-color
-        border-left: 2px solid $none-color
+// @keyframes slidein 
+//     0% 
+//         border-bottom: 2px solid $none-color
+//         border-right: 2px solid $none-color
+//         border-top: 2px solid $none-color
+//         border-left: 2px solid $none-color
 
-    25%
-        border-bottom: 2px solid $white
-        border-right: 2px solid $none-color
-        border-top: 2px solid $none-color
-        border-left: 2px solid $none-color
+//     25%
+//         border-bottom: 2px solid $white
+//         border-right: 2px solid $none-color
+//         border-top: 2px solid $none-color
+//         border-left: 2px solid $none-color
 
-    50%
-        border-bottom: 2px solid $white
-        border-right: 2px solid $white
-        border-top: 2px solid $none-color
-        border-left: 2px solid $none-color
+//     50%
+//         border-bottom: 2px solid $white
+//         border-right: 2px solid $white
+//         border-top: 2px solid $none-color
+//         border-left: 2px solid $none-color
 
-    75%
-        border-bottom: 2px solid $white
-        border-right: 2px solid $white
-        border-top: 2px solid $white
-        border-left: 2px solid $none-color
+//     75%
+//         border-bottom: 2px solid $white
+//         border-right: 2px solid $white
+//         border-top: 2px solid $white
+//         border-left: 2px solid $none-color
 
-    100% 
-        border-bottom: 2px solid $white
-        border-right: 2px solid $white
-        border-top: 2px solid $white
-        border-left: 2px solid $white
+//     100% 
+//         border-bottom: 2px solid $white
+//         border-right: 2px solid $white
+//         border-top: 2px solid $white
+//         border-left: 2px solid $white
   
 
 

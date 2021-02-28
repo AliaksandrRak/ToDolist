@@ -1,14 +1,17 @@
 import React from "react";
-import "./Support.sass";
+import "./Chats.sass";
 
 import DragDropContextClass from "../components/DragDropContext";
 import SendMessageForm from "../components/SendMessageForm";
+import ChatsMenu from "../components/ChatsMenu";
 
-function Support(props) {
+function Chats(props) {
   return (
-    <div className="todoPage">
-      <div className="todoPage-content">
+    <div className="chats">
+      <ChatsMenu></ChatsMenu>
+      <div className="chats-content">
         <h1>Тех поддержка Сайта</h1>
+        
 
         <DragDropContextClass />
         <SendMessageForm />
@@ -17,4 +20,4 @@ function Support(props) {
   );
 }
 
-export default Support;
+export default Chats;
