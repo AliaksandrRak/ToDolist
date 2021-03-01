@@ -7,12 +7,14 @@ import { socketEmit, createTask_api } from "./api";
 function SendMessageForm(props) {
   const [taskText, setTaskText] = useState();
 
+  const userName = localStorage.getItem('username');
+
   const createTask = () => {
     let id = Math.ceil(Math.random() * 100) + "id";
     let newEl = {
       id: id,
       isCompleted: false,
-      isBeingEdited: { status: false, user: "" },
+      isBeingEdited: { status: false, user: userName },
       index: 0,
       text: taskText,
     };
@@ -31,7 +33,7 @@ function SendMessageForm(props) {
             setTaskText(e.target.value);
           }}
         />
-      <button className='messageForm-btn' onClick={createTask}>send</button>
+      <div className='messageForm-btn' onClick={createTask}>send</div>
     </div>
   );
 }

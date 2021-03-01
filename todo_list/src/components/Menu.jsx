@@ -5,7 +5,8 @@ import GroupRoundedIcon from "@material-ui/icons/GroupRounded";
 import ForumRoundedIcon from "@material-ui/icons/ForumRounded";
 import MenuBookRoundedIcon from "@material-ui/icons/MenuBookRounded";
 import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
-import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
+import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
+import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import MyIcons from "../utils/MyIcons";
 
 function Menu(props) {
@@ -29,14 +30,13 @@ function Menu(props) {
         </div>
 
         <div className="menu-content-collapse">
-          <MyIcons click={()=>setIsOpen(!isOpen)}>
-            {
-              isOpen ?
-              <ArrowBackRoundedIcon/>
-              :
-              <ArrowForwardRoundedIcon/>
-            }
-            
+          <Link to="/login">
+            <MyIcons>
+              <ExitToAppRoundedIcon />
+            </MyIcons>
+          </Link>
+          <MyIcons click={() => setIsOpen(!isOpen)}>
+            {isOpen ? <ArrowBackRoundedIcon /> : <ArrowForwardRoundedIcon />}
           </MyIcons>
         </div>
       </div>

@@ -3,23 +3,25 @@
 .messageForm 
     display: flex
     align-items: flex-end
-    flex-wrap: wrap 
     background: $gray-ligth
 
-
-    @media screen and ( max-width: 900px )
-        justify-content: center
-
     &-field
+        width: 90%
         background: $gray-ligth
+
         textarea
+            font-family: $font !important
+            font-size: 16px
+            font-weight: normal
+            letter-spacing: .5px
             padding: 0 10px
+            color: $text-dark
         div
             &::after,&::before
                 display: none;
 
     &-btn
-        padding: 0px 15px
+       
         background: $main-dark-blue
         border: 2px solid $none-color
         transition: all 1.3s
@@ -27,7 +29,11 @@
         color: $white
         font-weight: 600
         cursor: pointer
-        height: 32px
+        height: 53px
+        width: 10%
+        display: flex
+        align-items: center
+        justify-content: center
 
         @media screen and ( max-width: 900px )
             margin-top: 20px

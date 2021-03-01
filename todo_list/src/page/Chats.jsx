@@ -10,11 +10,15 @@ function Chats(props) {
     <div className="chats">
       <ChatsMenu></ChatsMenu>
       <div className="chats-content">
-        <h1>Тех поддержка Сайта</h1>
-        
-
+        <div className="chats-content-messages">
         <DragDropContextClass />
+        </div>
+
+       
+        <div className="chats-content-send">
         <SendMessageForm />
+        </div>
+       
       </div>
     </div>
   );

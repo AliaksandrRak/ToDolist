@@ -1,9 +1,7 @@
 import React from 'react';
 import './DragDropContext.sass'
 
-import { DragDropContext } from 'react-beautiful-dnd';
 import { reorder } from './DragDropSettings'
-import DraggableElement from './DraggableElement'
 
 import {
     socketEmit, socket,  addUser_api,
@@ -12,6 +10,7 @@ import {
     stopBeingEdited_api, disconnect_api, reconnect_api,
     reconnect_error_api, userConnect_api,
 } from './api'
+import Messages from './Messages';
 
 
 
@@ -115,11 +114,14 @@ class DragDropContextClass extends React.Component {
     }
 
     render() {
-
+        debugger
         return (
             <>
                 <span className="information">{this.state.numberUsers}</span>
-                <DragDropContext onDragEnd={this.onDragEnd}>
+                {this.state.todoList.map((item, index)=>
+                    <Messages user={item.isBeingEdited.user} text={item.text}></Messages>
+                    )}
+                {/* <DragDropContext onDragEnd={this.onDragEnd}>
                     <DraggableElement
                         deleteTask={this.deleteTask}
                         changeStatus={this.changeStatus}
@@ -127,7 +129,7 @@ class DragDropContextClass extends React.Component {
                         changeTask={this.changeTask}
                         items={this.state.todoList}
                         id="todoList" />
-                </DragDropContext>
+                </DragDropContext> */}
             </>
         );
     }
