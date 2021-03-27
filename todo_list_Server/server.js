@@ -1,94 +1,67 @@
-
-var express = require('express');
+var express = require("express");
 var app = express();
-var path = require('path');
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var port = process.env.PORT || 3001;
+const bodyParser = require("body-parser");
 
-server.listen(port, () => {
-  console.log('Server listening at port %d', port);
+// const config = require("./config");
+const socket = require("./socket");
+const auth = require("./endPoints/auth");
+const user = require("./endPoints/user");
+
+var port = process.env.PORT || 3002;
+
+const jsonParser = bodyParser.json();
+
+auth.creatAdmin();
+
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
+    );
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    next();
+  });
+
+app.post("/login", jsonParser, function (request, response) {
+    if(!request.body) return response.sendStatus(400);
+    console.log('--------------------------------------------------login------------------------------------------------------');
+    console.log("/login", request.body);
+    auth.login(request, response);
+});
+
+app.get("/user", jsonParser, function (request, response) {
+    console.log('-----------------------------------------------/user---------------------------------------------------------');
+    console.log("/user/get");
+    user.userGet(request, response);
+});
+
+app.post("/user", jsonParser, function (request, response) {
+    if(!request.body) return response.sendStatus(400);
+    console.log('-----------------------------------------------/user---------------------------------------------------------');
+    console.log("/user/add", request.body);
+    user.userAdd(request, response);
+});
+
+app.put("/user", jsonParser, function (request, response) {
+    if(!request.body) return response.sendStatus(400);
+    console.log('-----------------------------------------------/user---------------------------------------------------------');
+    console.log("/user/update", request.body);
+    user.userUpdate(request, response);
+});
+
+app.delete("/user", jsonParser, function (request, response) {
+    if(!request.body) return response.sendStatus(400);
+    console.log('-----------------------------------------------/user---------------------------------------------------------');
+    console.log("/user/delete", request.body);
+    user.userDelete(request, response);
+});
+
+socket.initSocket();
+
+app.listen(port, () => {
+  console.log("Server endpoints listening at port %d", port);
+  console.log('----------------------------------------------Server----------------------------------------------------------');
 });
 
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-var numUsers = 0;
-var todoList = []; // instead of an array, there can be any database
-
-io.on('connection', (socket) => {
-  var addedUser = false;
-
-  socket.on('addUser', (username) => {
-    console.log("username", username);
-    if (addedUser) return;
-
-    socket.username = username;
-    ++numUsers;
-    addedUser = true;
-    socket.emit('login', todoList);
-
-    io.sockets.emit('userConnect', {
-      username: socket.username,
-      numUsers: numUsers
-    });
-
-  });
-
-  socket.on('updateTask', (data) => {
-
-    todoList = data;
-    io.sockets.emit('tasksList',  todoList);
-
-  });
-
-  socket.on('createTask', (data) => {
-
-    todoList.push(data);
-    io.sockets.emit('tasksList',  todoList);
-
-  });
-
-  socket.on('deleteTask', function (id) {
-
-    todoList = todoList.filter(el => el.id !== id);
-
-    io.sockets.emit('tasksList',  todoList);
-
-  });
-
-  socket.on('beingEdited', (id) => {
-
-    todoList.find((el, index) => el.id === id && 
-    (todoList[index].isBeingEdited = { status: !todoList[index].isBeingEdited.status, user: socket.username }));
-
-    io.sockets.emit('tasksList',  todoList);
-
-  });
-
-  socket.on('stopBeingEdited', (id) => {
-
-    todoList.find((el, index) => el.id === id && 
-    (todoList[index].isBeingEdited = { status: !todoList[index].isBeingEdited.status, user: '' }));
-
-    io.sockets.emit('tasksList',  todoList);
-
-  });
-
-  socket.on('disconnect', () => {
-    console.log("disconnect", numUsers);
-
-    if (addedUser) {
-      --numUsers;
-
-      io.sockets.emit('userLeft', {
-        username: socket.username,
-        numUsers: numUsers
-      });
-
-    }
-
-  });
-
-});
