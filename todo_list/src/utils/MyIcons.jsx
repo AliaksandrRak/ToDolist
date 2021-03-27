@@ -16,5 +16,5 @@ const useStyles = makeStyles({
 
 export default function MyIcons(props) {
   const classes = useStyles();
-  return <IconButton onClick={props.click} className={classes.root}>{props.children}</IconButton>;
+  return <IconButton onClick={props.click} disabled={props.disabled} className={classes.root}>{props.children}</IconButton>;
 }

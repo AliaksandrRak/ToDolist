@@ -7,14 +7,14 @@ import { socketEmit, createTask_api } from "./api";
 function SendMessageForm(props) {
   const [taskText, setTaskText] = useState();
 
-  const userName = localStorage.getItem('username');
+  const userName = JSON.parse(localStorage.getItem("user"));
 
   const createTask = () => {
     let id = Math.ceil(Math.random() * 100) + "id";
     let newEl = {
       id: id,
       isCompleted: false,
-      isBeingEdited: { status: false, user: userName },
+      isBeingEdited: { status: false, user: userName._id },
       index: 0,
       text: taskText,
     };

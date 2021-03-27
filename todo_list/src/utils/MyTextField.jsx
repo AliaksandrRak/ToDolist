@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     '& label': {
         color: '#fff'
     },
-    input: {
+    "& input": {
         color: '#fff'
     },
     "& label.Mui-focused": {
@@ -37,6 +37,8 @@ export default function MyTextField(props) {
     <TextField
       className={classes.root}
       error={props.isError}
+      onChange={props.change}
+      value={props.value}
       helperText={props.isError && props.errorText}
       label={props.label}
     />

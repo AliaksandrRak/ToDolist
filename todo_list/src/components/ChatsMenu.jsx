@@ -3,6 +3,7 @@ import MyTextField from "../utils/MyTextField";
 import "./ChatsMenu.sass";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import MyIcons from "../utils/MyIcons";
+import MyBadge from "../utils/MyBadge";
 
 function ChatsMenu(props) {
   const [isOpen, setIsOpen] = useState(true);
@@ -11,7 +12,6 @@ function ChatsMenu(props) {
     { name: "Alex", messages: 9 },
     { name: "Kato", messages: 10 },
     { name: "warm", messages: 300 },
-
   ];
 
   return (
@@ -24,12 +24,12 @@ function ChatsMenu(props) {
           </MyIcons>
         </div>
         <div className="chatsMenu-content-chats">
-          {chatsArray.map((item) => (
-            <div className="chatsMenu-content-chats-item">
-              <span className="chatsMenu-content-chats-item-name">{item.name}</span>
-              <div className="chatsMenu-content-chats-item-messages">
-                <span>{item.messages}</span>
-              </div>
+          {chatsArray.map((item, index) => (
+            <div key={index} className="chatsMenu-content-chats-item">
+              <span className="chatsMenu-content-chats-item-name">
+                {item.name}
+              </span> 
+              <MyBadge messages={item.messages} />
             </div>
           ))}
         </div>

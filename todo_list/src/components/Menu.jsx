@@ -18,19 +18,23 @@ function Menu(props) {
     { url: "/knowledgeBase", title: MenuBookRoundedIcon },
   ];
 
+  const logout = ()=> {
+    localStorage.removeItem('user');
+  }
+
   return (
     <div className={"menu " + (isOpen ? "menu-open" : "menu-close")}>
       <div className="menu-content">
         <div className="menu-content-links">
-          {linkArray.map((el) => (
-            <Link to={el.url}>
+          {linkArray.map((el, index) => (
+            <Link key={index} to={el.url}>
               <MyIcons>{React.createElement(el.title)}</MyIcons>
             </Link>
           ))}
         </div>
 
         <div className="menu-content-collapse">
-          <Link to="/login">
+          <Link to="/login" onClick={logout}>
             <MyIcons>
               <ExitToAppRoundedIcon />
             </MyIcons>

@@ -7,7 +7,7 @@ import { getItemStyle, getListStyle } from './DragDropSettings';
 
 function DraggableElement(props) {
 
-    let username = window.localStorage.getItem('username');
+    let username = JSON.parse(localStorage.getItem("user"));
     const [text, setText] = useState();
 
     return (
@@ -29,7 +29,7 @@ function DraggableElement(props) {
 
                             {(provided, snapshot) => (
                                 <div style={{ position: 'relative' }}>
-                                    <div className={`${(item.isBeingEdited.status && item.isBeingEdited.user !== username) ? 'beingEdited' : 'beingEdited-hide'}`} >
+                                    <div className={`${(item.isBeingEdited.status && item.isBeingEdited.user !== username._id) ? 'beingEdited' : 'beingEdited-hide'}`} >
                                         {item.isBeingEdited.user} вносит изменения
                                     </div>
                                     <div
@@ -46,7 +46,7 @@ function DraggableElement(props) {
 
                                             <input type="checkbox" onChange={() => props.changeStatus(item.id)} checked={item.isCompleted} />
                                             
-                                            {(item.isBeingEdited.status && item.isBeingEdited.user === username) ?
+                                            {(item.isBeingEdited.status && item.isBeingEdited.user === username._id) ?
                                                 <div className='dragDropElement-editForm'>
                                                     <textarea className='dragDropElement-editForm-message' type="text" onChange={(e)=>setText(e.target.value)} value={text} />
                                                     <button className='dragDropElement-editForm-submit' onClick={() => props.changeTask(item.id, text)}>Изменить</button>

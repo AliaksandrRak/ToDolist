@@ -27,12 +27,41 @@
 
 
 .messages-local
+    position: relative
+
+    i
+        display: none
+        transition: $transition
+        cursor: pointer
+        color: $white
+        font-size: 12px
+        font-weight: bold
+        font-style: normal
+        position: absolute
+        top: 5px
+        right: -5px
+        background: $btn-color
+        padding: 2px 7px
+        border-radius: 50px
+
+    &:hover
+        i
+            display: block
 
     .messages-content
         background: $teal
+        max-width: 50%
+        overflow: hidden
+        text-overflow: ellipsis
+        word-break: break-all
+        
 
 .messages-income
 
     .messages-content
         background: $light-blue
+        max-width: 50%
+        overflow: hidden
+        text-overflow: ellipsis
+        word-break: break-all
     

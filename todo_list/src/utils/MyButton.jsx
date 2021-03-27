@@ -9,6 +9,8 @@ const useStyles = makeStyles({
     borderRadius: 3,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: '#fff',
+    fontFamily: "'Shippori Mincho B1', serif",
+    fontWeight: 600,
     height: 24,
     padding: '0 15px',
   },
